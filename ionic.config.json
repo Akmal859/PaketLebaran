@@ -1,0 +1,7 @@
+{
+  "name": "DevinaPaket",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
