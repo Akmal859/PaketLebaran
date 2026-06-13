@@ -1,400 +1,406 @@
-<ion-content [fullscreen]="true" class="lebaran-content" scrollEvents="true">
+<ion-content [fullscreen]="true" class="wc-content" [scrollEvents]="true">
 
-  <!-- ===== HERO SECTION ===== -->
+  <!-- ===== HERO HEADER ===== -->
   <div class="hero-section">
-    <div class="hero-bg-pattern"></div>
-    <div class="sparkle s1">✦</div>
-    <div class="sparkle s2">❋</div>
-    <div class="sparkle s3">✦</div>
-    <div class="sparkle s4">✦</div>
-    <div class="sparkle s5">❋</div>
-
+    <div class="hero-bg-overlay"></div>
     <div class="hero-inner">
-      <div class="brand-badge">
-        <span class="moon-icon">🌙</span>
-        <span class="brand-text">Spesial Lebaran 2025</span>
-      </div>
-      <div class="hero-logo-wrap">
-        <div class="mosque-icon">🕌</div>
+      <div class="host-badge">
+        <span class="host-emoji">🇺🇸 🇨🇦 🇲🇽</span>
+        <span class="host-text">USA · CANADA · MEXICO</span>
       </div>
       <h1 class="hero-title">
-        <span class="title-white">Devina</span>
-        <span class="title-gold">Paket</span>
+        <span class="title-fifa">FIFA</span>
+        <span class="title-wc">WORLD CUP 2026</span>
       </h1>
-      <p class="hero-tagline">Hamper Lebaran Berkualitas<br>Untuk Orang-orang Tersayang</p>
-      <div class="hero-chips">
-        <div class="chip"><span>🚚</span> Free Antar</div>
-        <div class="chip"><span>✨</span> Kualitas Terjamin</div>
-        <div class="chip"><span>💜</span> Terpercaya</div>
-      </div>
-      <div class="hero-scroll-hint">
-        <span>Lihat Paket</span>
-        <div class="scroll-arrow">↓</div>
+      <p class="hero-tagline">Jadwal Resmi & Pembagian Grup Negara Peserta</p>
+      
+      <div class="hero-stats-grid">
+        <div class="hero-stat-card clickable-stat" (click)="openCountriesModal()">
+          <p class="stat-num">48</p>
+          <p class="stat-label">NEGARA</p>
+        </div>
+        <div class="hero-stat-card clickable-stat" (click)="switchToTab('grup')">
+          <p class="stat-num">12</p>
+          <p class="stat-label">GRUP</p>
+        </div>
+        <div class="hero-stat-card clickable-stat" (click)="openVenuesModal()">
+          <p class="stat-num">16</p>
+          <p class="stat-label">VENUE</p>
+        </div>
+        <div class="hero-stat-card clickable-stat" (click)="switchToTab('jadwal')">
+          <p class="stat-num">104</p>
+          <p class="stat-label">MATCHES</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== INTRO ===== -->
-  <div class="section-intro">
-    <div class="purple-line"></div>
-    <p class="intro-eyebrow">✨ Pilihan Terbaik Untuk Anda ✨</p>
-    <h2 class="intro-title">3 Pilihan Paket</h2>
-    <p class="intro-desc">Setiap paket dikurasi dengan produk pilihan terbaik untuk mempererat silaturahmi di Hari Raya
-      Idul Fitri.</p>
-    <div class="purple-line"></div>
-  </div>
-
-  <!-- ===== TABS ===== -->
-  <div class="pkg-tabs-wrap">
-    <div class="pkg-tabs">
-      <button class="pkg-tab" [class.active]="activeTab === 'A'" (click)="setTab('A')">
-        <span class="tab-emoji">🍬</span>
-        <span class="tab-name">Jajan Anak</span>
-        <span class="tab-price">30rb</span>
+  <!-- ===== NAVIGATION TABS ===== -->
+  <div class="tabs-navigation-wrap">
+    <div class="tabs-navigation">
+      <button class="nav-tab-btn" [class.active]="activeTab === 'jadwal'" (click)="activeTab = 'jadwal'">
+        <span class="tab-icon">📅</span>
+        <span class="tab-label">Jadwal Laga</span>
       </button>
-      <button class="pkg-tab" [class.active]="activeTab === 'B'" (click)="setTab('B')">
-        <span class="tab-emoji">🍪</span>
-        <span class="tab-name">Kue Lebaran</span>
-        <span class="tab-price">60rb</span>
+      <button class="nav-tab-btn" [class.active]="activeTab === 'grup'" (click)="activeTab = 'grup'">
+        <span class="tab-icon">🏆</span>
+        <span class="tab-label">Pembagian Grup</span>
       </button>
-      <button class="pkg-tab" [class.active]="activeTab === 'C'" (click)="setTab('C')">
-        <span class="tab-emoji">🛒</span>
-        <span class="tab-name">Sembako</span>
-        <span class="tab-price">90rb</span>
+      <button class="nav-tab-btn" [class.active]="activeTab === 'pelatih'" (click)="activeTab = 'pelatih'">
+        <span class="tab-icon">🎽</span>
+        <span class="tab-label">Pelatih Kepala</span>
       </button>
     </div>
   </div>
 
-  <!-- ===== PACKAGE CARDS ===== -->
-  <div class="packages-wrap">
+  <!-- ===== MAIN TAB CONTENT ===== -->
+  <div class="main-content-container">
 
-    <!-- PAKET A -->
-    <div class="pkg-card card-a" [class.hidden]="activeTab !== 'A' && activeTab !== 'all'">
-      <div class="pkg-card-header header-a">
-        <div class="pkg-header-glow"></div>
-        <div class="pkg-badge-tag">Starter</div>
-        <div class="pkg-icon-circle circle-a">🍬</div>
-        <h3 class="pkg-title">Paket Jajan Anak</h3>
-        <p class="pkg-subtitle">Seru & Menyenangkan</p>
-        <div class="pkg-price-wrap">
-          <span class="price-rp">Rp</span>
-          <span class="price-num">30.000</span>
-          <span class="price-per">/bulan</span>
-        </div>
-      </div>
-      <div class="pkg-card-body">
-        <p class="items-label">📦 Isi Paket :</p>
-        <ul class="items-list">
-          <li><span class="item-dot dot-a">●</span><span>1 ltr Teh Botol Sosro</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1,3 ml Teh Pucuk</span></li>
-          <li><span class="item-dot dot-a">●</span><span>6 pc Susu Milku</span></li>
-          <li><span class="item-dot dot-a">●</span><span>2 pc Pop Mie</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Bengbeng 80 gram</span></li>
-          <li><span class="item-dot dot-a">●</span><span>Wafer Tanggo 100 gram</span></li>
-          <li><span class="item-dot dot-a">●</span><span>Inako Mini Jelly</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Permen</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 toples Sosis Sonice</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Roma Malkist 90 gram</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Fanta 390 ml</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Sprite 390 ml</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc French Fries 60 gram</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Taro 62 gram</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Monde Snack 60 gram</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Guribee 65 gram</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 L Natadecoco</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pack Yakult</span></li>
-          <li><span class="item-dot dot-a">●</span><span>1 pc Silverqueen</span></li>
-        </ul>
-        <div class="item-count-badge">19 Item</div>
-        <button class="order-btn btn-a" (click)="orderPackage('A – Jajan Anak', 30000)">
-          <ion-icon name="logo-whatsapp"></ion-icon>
-          <span>Pesan Sekarang</span>
-        </button>
-      </div>
-    </div>
+    <!-- ==================== TAB 1: JADWAL PERTANDINGAN ==================== -->
+    <div *ngIf="activeTab === 'jadwal'" class="tab-section-wrap animate-fade-in">
+      <div class="matches-list">
+        <div class="match-card" *ngFor="let match of matches">
+          <div class="match-header">
+            <span class="match-group-label">GRUP {{ match.group }}</span>
+            <span class="match-status-badge mendatang">Jadwal Laga</span>
+          </div>
 
-    <!-- PAKET B -->
-    <div class="pkg-card card-b popular-card" [class.hidden]="activeTab !== 'B' && activeTab !== 'all'">
-      <div class="pkg-card-header header-b">
-        <div class="pkg-header-glow glow-b"></div>
-        <div class="pkg-badge-tag tag-b">Best Value</div>
-        <div class="pkg-icon-circle circle-b">🍪</div>
-        <h3 class="pkg-title">Paket Kue Lebaran</h3>
-        <p class="pkg-subtitle">Elegan & Berkesan</p>
-        <div class="pkg-price-wrap">
-          <span class="price-rp price-gold">Rp</span>
-          <span class="price-num price-gold">60.000</span>
-          <span class="price-per">/bulan</span>
-        </div>
-      </div>
-      <div class="pkg-card-body">
-        <p class="items-label">📦 Isi Paket :</p>
-        <ul class="items-list">
-          <li><span class="item-dot dot-b">●</span><span>1 dus Indomie</span></li>
-          <li><span class="item-dot dot-b">●</span><span>1 pc Monde Butter Cookies (Besar)</span></li>
-          <li><span class="item-dot dot-b">●</span><span>1 pc Monde Egroll (Kecil)</span></li>
-          <li><span class="item-dot dot-b">●</span><span>1 pcs Khongguan Biscuit (Kecil)</span></li>
-          <li><span class="item-dot dot-b">●</span><span>1 pc Tanggo Wafer</span></li>
-          <li><span class="item-dot dot-b">●</span><span>1 pc Sirup Marjan</span></li>
-          <li><span class="item-dot dot-b">●</span><span>1 pc Sirup ABC Squash</span></li>
-          <li><span class="item-dot dot-b">●</span><span>1 kg Terigu</span></li>
-          <li><span class="item-dot dot-b">●</span><span>1 kg Gula Putih</span></li>
-          <li><span class="item-dot dot-b">●</span><span>2 liter Minyak Goreng</span></li>
-        </ul>
-        <div class="item-count-badge badge-gold">10 Item</div>
-        <button class="order-btn btn-b" (click)="orderPackage('B – Kue Lebaran', 60000)">
-          <ion-icon name="logo-whatsapp"></ion-icon>
-          <span>Pesan Sekarang</span>
-        </button>
-      </div>
-    </div>
+          <div class="match-teams-row">
+            <!-- Home Team -->
+            <div class="team-side home" (click)="openSquad(match.home)">
+              <img [src]="getFlagUrl(match.home)" alt="{{ match.home }}" class="team-flag" />
+              <span class="team-name">{{ match.home }}</span>
+            </div>
 
-    <!-- PAKET C -->
-    <div class="pkg-card card-c" [class.hidden]="activeTab !== 'C' && activeTab !== 'all'">
-      <div class="pkg-card-header header-c">
-        <div class="pkg-header-glow glow-c"></div>
-        <div class="pkg-badge-tag tag-c">Premium</div>
-        <div class="pkg-icon-circle circle-c">👑</div>
-        <h3 class="pkg-title">Paket Sembako</h3>
-        <p class="pkg-subtitle">Lengkap & Berkah</p>
-        <div class="pkg-price-wrap">
-          <span class="price-rp price-royal">Rp</span>
-          <span class="price-num price-royal">90.000</span>
-          <span class="price-per">/bulan</span>
-        </div>
-      </div>
-      <div class="pkg-card-body">
-        <p class="items-label">📦 Isi Paket :</p>
-        <ul class="items-list">
-          <li><span class="item-dot dot-c">●</span><span>Beras 20 kg</span></li>
-          <li><span class="item-dot dot-c">●</span><span>Daging Sapi 2 kg</span></li>
-          <li><span class="item-dot dot-c">●</span><span>Khongguan Kecil 1 pcs</span></li>
-          <li><span class="item-dot dot-c">●</span><span>Terigu 1 kg</span></li>
-          <li><span class="item-dot dot-c">●</span><span>Gula Putih 1 kg</span></li>
-          <li><span class="item-dot dot-c">●</span><span>Minyak Goreng 2 liter</span></li>
-          <li><span class="item-dot dot-c">●</span><span>Kecap Manis 500 ml</span></li>
-          <li><span class="item-dot dot-c">●</span><span>Sirup Marjan Squash 1 liter</span></li>
-        </ul>
-        <div class="item-count-badge badge-royal">8 Item</div>
-        <button class="order-btn btn-c" (click)="orderPackage('C – Sembako', 90000)">
-          <ion-icon name="logo-whatsapp"></ion-icon>
-          <span>Pesan Sekarang</span>
-        </button>
-      </div>
-    </div>
+            <!-- VS Area (No Scores) -->
+            <div class="score-display">
+              <div class="vs-text">VS</div>
+              <span class="match-time-text">{{ match.time }} WIB</span>
+            </div>
 
-  </div>
-
-  <!-- SHOW ALL -->
-  <div class="show-all-wrap">
-    <button class="show-all-btn" (click)="toggleAll()">
-      <span *ngIf="activeTab !== 'all'">Lihat Semua Paket ↓</span>
-      <span *ngIf="activeTab === 'all'">Sembunyikan ↑</span>
-    </button>
-  </div>
-
-  <!-- ===== PRICE SUMMARY ===== -->
-  <div class="price-summary-section">
-    <h2 class="ps-title">Ringkasan Harga</h2>
-    <div class="ps-cards">
-      <div class="ps-card ps-a" (click)="orderPackage('A – Jajan Anak', 30000)">
-        <span class="ps-emoji">🍬</span>
-        <div class="ps-info">
-          <p class="ps-name">Jajan Anak</p>
-          <p class="ps-price">Rp 30.000<span>/bln</span></p>
-        </div>
-        <div class="ps-wa"><ion-icon name="logo-whatsapp"></ion-icon></div>
-      </div>
-      <div class="ps-card ps-b popular-ps" (click)="orderPackage('B – Kue Lebaran', 60000)">
-        <span class="ps-emoji">🍪</span>
-        <div class="ps-info">
-          <p class="ps-name">Kue Lebaran</p>
-          <p class="ps-price ps-gold">Rp 60.000<span>/bln</span></p>
-        </div>
-        <div class="ps-wa wa-gold"><ion-icon name="logo-whatsapp"></ion-icon></div>
-      </div>
-      <div class="ps-card ps-c" (click)="orderPackage('C – Sembako', 90000)">
-        <span class="ps-emoji">🛒</span>
-        <div class="ps-info">
-          <p class="ps-name">Sembako</p>
-          <p class="ps-price ps-royal">Rp 90.000<span>/bln</span></p>
-        </div>
-        <div class="ps-wa wa-royal"><ion-icon name="logo-whatsapp"></ion-icon></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== KEUNGGULAN ===== -->
-  <div class="keunggulan-section">
-    <div class="ku-bg-pattern"></div>
-    <h2 class="ku-title">Kenapa Pilih Kami?</h2>
-    <div class="ku-grid">
-      <div class="ku-item">
-        <div class="ku-icon-wrap"><span>🚀</span></div>
-        <p class="ku-label">Pengiriman<br>Tepat Waktu</p>
-      </div>
-      <div class="ku-item">
-        <div class="ku-icon-wrap"><span>💎</span></div>
-        <p class="ku-label">Produk<br>Original</p>
-      </div>
-      <div class="ku-item">
-        <div class="ku-icon-wrap"><span>🎁</span></div>
-        <p class="ku-label">Harga<br>Terjangkau</p>
-      </div>
-      <div class="ku-item">
-        <div class="ku-icon-wrap"><span>💬</span></div>
-        <p class="ku-label">CS Siap<br>24 Jam</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== REVIEW SECTION ===== -->
-  <div class="review-section">
-    <div class="review-header">
-    <!-- MODE ADMIN TERSEMBUNYI -->
-    <div class="admin-banner" *ngIf="isAdminMode">
-      <span>🔐 Mode Admin Aktif — Anda bisa hapus ulasan mana saja</span>
-      <button class="admin-exit-btn" (click)="exitAdminMode()">Keluar</button>
-    </div>
-
-      <h2 class="review-title" (click)="onTitleTap()" style="cursor:default;user-select:none">💬 Ulasan Pelanggan</h2>
-      <p class="review-subtitle">Bagikan pengalaman belanja Anda bersama kami</p>
-      <div class="review-stats" *ngIf="reviews.length > 0">
-        <span class="stat-num">{{ averageRating | number:'1.1-1' }}</span>
-        <div class="stat-stars">
-          <span *ngFor="let s of getStarArray(averageRating)" class="star filled">★</span>
-        </div>
-        <span class="stat-count">({{ reviews.length }} ulasan)</span>
-      </div>
-    </div>
-
-    <!-- FORM TAMBAH REVIEW -->
-    <div class="review-form-card">
-      <p class="form-title">✍️ Tulis Ulasan Anda</p>
-
-      <div class="form-group">
-        <label class="form-label">Nama Anda</label>
-        <input class="form-input" [class.input-error]="formErrors.name" type="text" placeholder="Contoh: Ibu Sari" [(ngModel)]="newReview.name"
-          maxlength="40" (input)="clearError('name')" />
-        <p class="field-error" *ngIf="formErrors.name">⚠️ {{ formErrors.name }}</p>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Pilih Paket</label>
-        <div class="pkg-selector">
-          <button class="pkg-sel-btn" [class.sel-active]="newReview.paket === 'A'" (click)="newReview.paket = 'A'">🍬
-            Jajan Anak</button>
-          <button class="pkg-sel-btn" [class.sel-active]="newReview.paket === 'B'" (click)="newReview.paket = 'B'">🍪
-            Kue Lebaran</button>
-          <button class="pkg-sel-btn" [class.sel-active]="newReview.paket === 'C'" (click)="newReview.paket = 'C'">🛒
-            Sembako</button>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Rating</label>
-        <div class="star-picker">
-          <span *ngFor="let n of [1,2,3,4,5]" class="star-pick" [class.active]="n <= newReview.rating"
-            (click)="newReview.rating = n; clearError('rating')">★</span>
-        </div>
-        <p class="rating-label">{{ getRatingLabel(newReview.rating) }}</p>
-        <p class="field-error" *ngIf="formErrors.rating">⚠️ {{ formErrors.rating }}</p>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Komentar</label>
-        <textarea class="form-textarea" [class.input-error]="formErrors.comment" placeholder="Ceritakan pengalaman Anda dengan paket ini..."
-          [(ngModel)]="newReview.comment" rows="3" maxlength="300" (input)="clearError('comment')"></textarea>
-        <p class="char-count">{{ newReview.comment.length }}/300</p>
-        <p class="field-error" *ngIf="formErrors.comment">⚠️ {{ formErrors.comment }}</p>
-      </div>
-
-      <button class="submit-review-btn" (click)="submitReview()">
-        <ion-icon name="send"></ion-icon>
-        <span>Kirim Ulasan</span>
-      </button>
-
-      <div class="success-msg" *ngIf="showSuccess">
-        ✅ Terima kasih! Ulasan Anda sudah terkirim 💜
-      </div>
-    </div>
-
-    <!-- DAFTAR REVIEW -->
-    <div class="reviews-list" *ngIf="reviews.length > 0">
-      <div class="review-card" *ngFor="let r of reviews; let i = index">
-        <div class="review-top">
-          <div class="reviewer-avatar">{{ r.name.charAt(0).toUpperCase() }}</div>
-          <div class="reviewer-info">
-            <p class="reviewer-name">{{ r.name }}</p>
-            <div class="reviewer-stars">
-              <span *ngFor="let s of getStarArray(r.rating)" class="star-sm">★</span>
-              <span *ngFor="let s of getEmptyStarArray(r.rating)" class="star-sm empty">★</span>
+            <!-- Away Team -->
+            <div class="team-side away" (click)="openSquad(match.away)">
+              <span class="team-name">{{ match.away }}</span>
+              <img [src]="getFlagUrl(match.away)" alt="{{ match.away }}" class="team-flag" />
             </div>
           </div>
-          <div class="review-meta">
-            <span class="review-paket-badge" [class]="'badge-pkg-' + r.paket">
-              {{ r.paket === 'A' ? '🍬' : r.paket === 'B' ? '🍪' : '🛒' }} Paket {{ r.paket }}
-            </span>
-            <p class="review-date">{{ r.date }}</p>
+
+          <div class="match-footer">
+            <span class="venue-info">🏟️ {{ match.venue }}</span>
+            <span class="date-info">📅 {{ match.date }}</span>
           </div>
         </div>
-        <p class="review-comment">{{ filterKataKasar(r.comment) }}</p>
-
-        <!-- Tombol Hapus Admin -->
-        <div class="review-delete-wrap admin-delete-wrap" *ngIf="isAdminMode">
-          <div class="delete-confirm-box admin-confirm-box" *ngIf="adminShowConfirm === i">
-            <p class="delete-confirm-text">Hapus ulasan ini?</p>
-            <div class="delete-confirm-btns">
-              <button class="btn-cancel-del" (click)="adminCancelDelete()">Batal</button>
-              <button class="btn-confirm-del" (click)="adminDeleteReview(i)">Hapus</button>
-            </div>
-          </div>
-          <button class="delete-review-btn admin-del-btn" (click)="adminConfirmDelete(i)" *ngIf="adminShowConfirm !== i">
-            🛡️ Hapus
-          </button>
-        </div>
-
       </div>
     </div>
 
-    <div class="no-review" *ngIf="reviews.length === 0">
-      <div class="no-review-icon">💬</div>
-      <p>Belum ada ulasan. Jadilah yang pertama!</p>
+    <!-- ==================== TAB 2: PEMBAGIAN GRUP ==================== -->
+    <div *ngIf="activeTab === 'grup'" class="tab-section-wrap animate-fade-in">
+      <div class="groups-grid">
+        <div class="group-card" *ngFor="let g of groups">
+          <div class="group-card-header">
+            <h3 class="group-title">GRUP {{ g.name }}</h3>
+            <span class="group-subtitle">Negara Peserta</span>
+          </div>
+          
+          <div class="group-teams-list">
+            <div class="group-team-item" *ngFor="let team of g.teams" (click)="openSquad(team)">
+              <img [src]="getFlagUrl(team)" class="group-team-flag" alt="{{ team }}" />
+              <span class="group-team-name">{{ team }}</span>
+              <span class="arrow-icon">➔</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: PELATIH KEPALA ==================== -->
+    <div *ngIf="activeTab === 'pelatih'" class="tab-section-wrap animate-fade-in">
+
+      <!-- Search Bar -->
+      <div class="search-bar-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text"
+               class="search-input"
+               placeholder="Cari pelatih, negara, atau kebangsaan..."
+               [(ngModel)]="coachSearchQuery" />
+        <button class="search-clear-btn" *ngIf="coachSearchQuery" (click)="coachSearchQuery = ''">×</button>
+      </div>
+
+      <!-- Coaches grouped by group -->
+      <div class="coach-groups-container">
+        <div class="coach-group-section" *ngFor="let g of getFilteredCoachGroups()">
+
+          <!-- Group Header -->
+          <div class="coach-group-header">
+            <div class="coach-group-label-badge">GRUP {{ g }}</div>
+            <span class="coach-group-count">{{ getCoachesByGroup(g).length }} Pelatih</span>
+          </div>
+
+          <!-- Coach Cards Grid -->
+          <div class="coach-cards-grid">
+            <div class="coach-card" *ngFor="let c of getCoachesByGroup(g)">
+
+              <!-- Coach Name Row -->
+              <div class="coach-name-row">
+                <span class="coach-ic">🧑‍💼</span>
+                <p class="coach-name">{{ c.name }}</p>
+              </div>
+
+              <div class="coach-details-row">
+
+                <!-- Melatih Timnas -->
+                <div class="coach-detail-block">
+                  <p class="coach-detail-label">Melatih Timnas</p>
+                  <div class="coach-detail-value">
+                    <img [src]="getFlagUrl(c.country)" class="coach-flag-sm" alt="{{ c.country }}" />
+                    <span class="coach-detail-text">{{ c.country }}</span>
+                  </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="coach-detail-sep"></div>
+
+                <!-- Berkebangsaan -->
+                <div class="coach-detail-block">
+                  <p class="coach-detail-label">Berkebangsaan</p>
+                  <div class="coach-detail-value">
+                    <img [src]="getFlagByCode(c.nationalityFlag)" class="coach-flag-sm" alt="{{ c.nationality }}" />
+                    <span class="coach-detail-text nationality-text">{{ c.nationality }}</span>
+                  </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="coach-detail-sep"></div>
+
+                <!-- Formasi Andalan -->
+                <div class="coach-detail-block">
+                  <p class="coach-detail-label">Formasi Andalan</p>
+                  <div class="coach-detail-value">
+                    <span class="coach-detail-text formation-text">📋 {{ c.formation }}</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Coach Bio -->
+              <div class="coach-bio-block">
+                <p class="coach-bio-label">Profil Singkat</p>
+                <p class="coach-bio-text">{{ c.bio }}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- No result -->
+        <div class="no-data-card" *ngIf="getFilteredCoachGroups().length === 0">
+          <span class="no-data-icon">🤷</span>
+          <p class="no-data-title">Pelatih tidak ditemukan</p>
+          <p class="no-data-desc">Tidak ada data yang sesuai dengan kata kunci pencarian Anda.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ===== SQUAD DETAILS MODAL ===== -->
+  <div class="modal-overlay" *ngIf="showSquadModal" (click)="closeSquad()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <img [src]="getFlagUrl(selectedCountry || '')" alt="" class="modal-title-flag" />
+          <div class="modal-titles">
+            <h2 class="modal-country-name">{{ selectedCountry }}</h2>
+            <p class="modal-subtitle">Skuad Resmi Piala Dunia 2026</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" (click)="closeSquad()">×</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Goalkeepers -->
+        <div class="position-group" *ngIf="getPlayersByPosition('GK').length > 0">
+          <h3 class="pos-title">🧤 PENJAGA GAWANG (GK)</h3>
+          <div class="players-grid">
+            <div class="player-card" *ngFor="let p of getPlayersByPosition('GK')">
+              <div class="player-avatar-container">
+                <img [src]="getPlayerAvatar(p.pos)" alt="" class="player-avatar-img" />
+                <div class="player-initials-badge">{{ getInitials(p.name) }}</div>
+              </div>
+              <div class="player-info">
+                <h4 class="player-name">{{ p.name }}</h4>
+                <p class="player-club">{{ p.club }}</p>
+                <div class="player-stats-row">
+                  <span class="stat-pill">🎂 {{ p.age }} th</span>
+                  <span class="stat-pill">👕 {{ p.caps }} caps</span>
+                  <span class="stat-pill" *ngIf="p.goals > 0">⚽ {{ p.goals }} gol</span>
+                </div>
+              </div>
+              <div class="pos-tag gk">GK</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Defenders -->
+        <div class="position-group" *ngIf="getPlayersByPosition('DF').length > 0">
+          <h3 class="pos-title">🛡️ BEK / BERTAHAN (DF)</h3>
+          <div class="players-grid">
+            <div class="player-card" *ngFor="let p of getPlayersByPosition('DF')">
+              <div class="player-avatar-container">
+                <img [src]="getPlayerAvatar(p.pos)" alt="" class="player-avatar-img" />
+                <div class="player-initials-badge">{{ getInitials(p.name) }}</div>
+              </div>
+              <div class="player-info">
+                <h4 class="player-name">{{ p.name }}</h4>
+                <p class="player-club">{{ p.club }}</p>
+                <div class="player-stats-row">
+                  <span class="stat-pill">🎂 {{ p.age }} th</span>
+                  <span class="stat-pill">👕 {{ p.caps }} caps</span>
+                  <span class="stat-pill" *ngIf="p.goals > 0">⚽ {{ p.goals }} gol</span>
+                </div>
+              </div>
+              <div class="pos-tag df">DF</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Midfielders -->
+        <div class="position-group" *ngIf="getPlayersByPosition('MF').length > 0">
+          <h3 class="pos-title">⚙️ GELANDANG (MF)</h3>
+          <div class="players-grid">
+            <div class="player-card" *ngFor="let p of getPlayersByPosition('MF')">
+              <div class="player-avatar-container">
+                <img [src]="getPlayerAvatar(p.pos)" alt="" class="player-avatar-img" />
+                <div class="player-initials-badge">{{ getInitials(p.name) }}</div>
+              </div>
+              <div class="player-info">
+                <h4 class="player-name">{{ p.name }}</h4>
+                <p class="player-club">{{ p.club }}</p>
+                <div class="player-stats-row">
+                  <span class="stat-pill">🎂 {{ p.age }} th</span>
+                  <span class="stat-pill">👕 {{ p.caps }} caps</span>
+                  <span class="stat-pill" *ngIf="p.goals > 0">⚽ {{ p.goals }} gol</span>
+                </div>
+              </div>
+              <div class="pos-tag mf">MF</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Forwards -->
+        <div class="position-group" *ngIf="getPlayersByPosition('FW').length > 0">
+          <h3 class="pos-title">⚡ PENYERANG (FW)</h3>
+          <div class="players-grid">
+            <div class="player-card" *ngFor="let p of getPlayersByPosition('FW')">
+              <div class="player-avatar-container">
+                <img [src]="getPlayerAvatar(p.pos)" alt="" class="player-avatar-img" />
+                <div class="player-initials-badge">{{ getInitials(p.name) }}</div>
+              </div>
+              <div class="player-info">
+                <h4 class="player-name">{{ p.name }}</h4>
+                <p class="player-club">{{ p.club }}</p>
+                <div class="player-stats-row">
+                  <span class="stat-pill">🎂 {{ p.age }} th</span>
+                  <span class="stat-pill">👕 {{ p.caps }} caps</span>
+                  <span class="stat-pill" *ngIf="p.goals > 0">⚽ {{ p.goals }} gol</span>
+                </div>
+              </div>
+              <div class="pos-tag fw">FW</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-btn-close-action" (click)="closeSquad()">Tutup Detail Skuad</button>
+      </div>
     </div>
   </div>
 
-  <!-- ===== CTA ===== -->
-  <div class="cta-section">
-    <div class="cta-inner">
-      <div class="cta-moon">🌙</div>
-      <h2 class="cta-title">Pesan Sekarang<br><span>Sebelum Kehabisan!</span></h2>
-      <p class="cta-desc">Stok terbatas setiap bulannya. Pastikan keluarga Anda mendapatkan paket terbaik!</p>
-      <button class="cta-btn" (click)="openWhatsApp()">
-        <ion-icon name="logo-whatsapp"></ion-icon>
-        <span>Hubungi Kami via WA</span>
-      </button>
-      <p class="cta-number">📱 083898525612</p>
+  <!-- ===== 48 COUNTRIES MODAL ===== -->
+  <div class="modal-overlay" *ngIf="showCountriesModal" (click)="closeCountriesModal()">
+    <div class="modal-container modal-container--wide" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-title-emoji" style="font-size: 24px; margin-right: 8px;">🌍</span>
+          <div class="modal-titles">
+            <h2 class="modal-country-name">48 Negara Peserta</h2>
+            <p class="modal-subtitle">Dikelompokkan per Benua · Klik negara untuk lihat skuad</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" (click)="closeCountriesModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="continent-section" *ngFor="let group of getCountriesByContinent()">
+          <div class="continent-header">
+            <span class="continent-emoji">{{ group.emoji }}</span>
+            <h3 class="continent-title">{{ group.name }}</h3>
+            <span class="continent-count">{{ group.countries.length }} negara</span>
+          </div>
+          <div class="countries-select-grid">
+            <div class="country-select-card"
+                 *ngFor="let country of group.countries"
+                 (click)="openSquadFromCountries(country)">
+              <img [src]="getFlagUrl(country)" alt="" class="country-select-flag" />
+              <span class="country-select-name">{{ country }}</span>
+              <span class="country-squad-arrow">›</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-btn-close-action" (click)="closeCountriesModal()">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 16 VENUES MODAL ===== -->
+  <div class="modal-overlay" *ngIf="showVenuesModal" (click)="closeVenuesModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-title-emoji" style="font-size: 24px; margin-right: 8px;">🏟️</span>
+          <div class="modal-titles">
+            <h2 class="modal-country-name">16 Venue Stadion</h2>
+            <p class="modal-subtitle">Stadion Penyelenggara FIFA World Cup 2026</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" (click)="closeVenuesModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="venues-grid-list">
+          <div class="venue-detail-card" *ngFor="let v of venues">
+            <div class="venue-info-main">
+              <span class="venue-stadium-name">{{ v.stadium }}</span>
+              <div class="venue-meta-line">
+                <span class="venue-city">📍 {{ v.city }}, {{ v.country }}</span>
+                <span class="venue-capacity">👥 Kapasitas: {{ v.capacity }}</span>
+              </div>
+            </div>
+            <img [src]="getFlagByCode(v.flag)" alt="" class="venue-country-flag" />
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-btn-close-action" (click)="closeVenuesModal()">Tutup</button>
+      </div>
     </div>
   </div>
 
   <!-- ===== FOOTER ===== -->
   <div class="footer-section">
-    <div class="footer-ornament">🕌</div>
-    <p class="footer-arab">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-    <p class="footer-tagline">Taqabbalallahu Minna wa Minkum</p>
-    <p class="footer-eid">Minal Aidin Wal Faidzin</p>
+    <div class="footer-logo">🏆</div>
+    <p class="footer-title">FIFA World Cup 2026 Dashboard</p>
+    <p class="footer-subtitle">USA · Canada · Mexico</p>
     <div class="footer-divider"></div>
-    <div class="footer-contact" (click)="openWhatsApp()">
-      <ion-icon name="logo-whatsapp"></ion-icon>
-      <span>083898525612</span>
-    </div>
-    <p class="footer-copy">© 2025 DevinaPaket · All Rights Reserved</p>
-  </div>
-
-  <!-- FAB WA -->
-  <div class="fab-wa" (click)="openWhatsApp()">
-    <ion-icon name="logo-whatsapp"></ion-icon>
-    <span class="fab-label">Pesan WA</span>
+    <p class="footer-copy">© 2026 FIFA 2026 Portal. Hak Cipta Dilindungi.</p>
   </div>
 
 </ion-content>
